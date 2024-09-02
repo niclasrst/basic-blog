@@ -1,0 +1,165 @@
+div.back {
+	position: fixed;
+	left: 4%;
+	bottom: 90%;
+	z-index: 999;
+}
+
+.arrow {
+	width: 12px;
+	height: 12px;
+	border: none;
+	background: none;
+	position: fixed;
+	display: inline-block;
+	transform: rotate(180deg) scale(2);
+	transition: opacity 0.3s ease-out;
+	opacity: 0;
+}
+
+.arrow::before {
+	top: 3px;
+	right: 6px;
+	width: 8px;
+	height: 8px;
+	content: "";
+	position: absolute;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	-webkit-box-shadow: 2px 2px 0 #493d3f, 3px 2px 0 #493d3f, 2px 3px 0 #493d3f,
+		3px 3px 0 #493d3f;
+	box-shadow: 2px 2px 0 #493d3f, 3px 2px 0 #493d3f, 2px 3px 0 #493d3f,
+		3px 3px 0 #493d3f;
+}
+
+.arrow::after {
+	width: 0;
+	height: 0;
+	left: -1px;
+	bottom: 50%;
+	content: "•";
+	color: #493d3f;
+	line-height: 0;
+	font-size: 15px;
+	position: absolute;
+	-webkit-transition: left 0.1s ease-out, bottom 0.1s ease-out,
+		letter-spacing 0.1s ease-out;
+	transition: left 0.1s ease-out, bottom 0.1s ease-out,
+		letter-spacing 0.1s ease-out;
+}
+
+.arrow:hover,
+.arrow:focus {
+	outline: none;
+}
+
+.arrow:hover::after,
+.arrow:focus::after {
+	left: 2px;
+}
+
+.arrow.-dark {
+	width: 12px;
+	height: 12px;
+	border: none;
+	background: none;
+	position: relative;
+	display: inline-block;
+}
+
+.arrow.-dark::before {
+	top: 3px;
+	right: 6px;
+	width: 8px;
+	height: 8px;
+	content: "";
+	position: absolute;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	-webkit-box-shadow: 2px 2px 0 #636e72, 3px 2px 0 #636e72, 2px 3px 0 #636e72,
+		3px 3px 0 #636e72;
+	box-shadow: 2px 2px 0 #636e72, 3px 2px 0 #636e72, 2px 3px 0 #636e72,
+		3px 3px 0 #636e72;
+}
+
+.arrow.-dark::after {
+	width: 0;
+	height: 0;
+	left: -4px;
+	bottom: 50%;
+	content: "•";
+	color: #636e72;
+	line-height: 0;
+	font-size: 14px;
+	position: absolute;
+	-webkit-transition: left 0.1s ease-out, bottom 0.1s ease-out,
+		letter-spacing 0.1s ease-out, opacity 0.2s ease-out;
+	transition: left 0.1s ease-out, bottom 0.1s ease-out,
+		letter-spacing 0.1s ease-out, opacity 0.2s ease-out;
+}
+
+.arrow.-dark:hover,
+.arrow.-dark:focus {
+	outline: none;
+}
+
+.arrow.-dark:hover::after,
+.arrow.-dark:focus::after {
+	left: 0px;
+	opacity: 0;
+}
+
+.arrow.-light {
+	width: 12px;
+	height: 12px;
+	border: none;
+	background: none;
+	position: relative;
+	display: inline-block;
+}
+
+.arrow.-light::before {
+	top: 3px;
+	right: 6px;
+	width: 8px;
+	height: 8px;
+	content: "";
+	position: absolute;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	-webkit-box-shadow: 2px 2px 0 #e8eaf6, 3px 2px 0 #e8eaf6, 2px 3px 0 #e8eaf6,
+		3px 3px 0 #e8eaf6;
+	box-shadow: 2px 2px 0 #e8eaf6, 3px 2px 0 #e8eaf6, 2px 3px 0 #e8eaf6,
+		3px 3px 0 #e8eaf6;
+}
+
+.arrow.-light::after {
+	width: 0;
+	height: 0;
+	left: -4px;
+	bottom: 50%;
+	content: "•";
+	color: #e8eaf6;
+	line-height: 0;
+	font-size: 14px;
+	position: absolute;
+	-webkit-transition: left 0.1s ease-out, bottom 0.1s ease-out,
+		letter-spacing 0.1s ease-out, opacity .2s ease-out;
+	transition: left 0.1s ease-out, bottom 0.1s ease-out,
+		letter-spacing 0.1s ease-out, opacity .2s ease-out;
+}
+
+.arrow.-light:hover,
+.arrow.-light:focus {
+	outline: none;
+}
+
+.arrow.-light:hover::after,
+.arrow.-light:focus::after {
+	left: 0px;
+	opacity: 0;
+}
+
+.arrow:hover {
+	cursor: pointer;
+}

@@ -1,0 +1,45 @@
+---
+layout: post
+title: "A hedging strategy derived by the BSM equation"
+date: 2024-08-14
+abstract: "Using the Black-Scholes-Merton equation and the martingale representation theorem, we will derive a hedging
+strategy for a derivative security in the Black-Scholes market."
+---
+
+<p class="Section">1 &ensp; Deriving a hedging strategy</p>
+<p class="BodyText Justified">
+    Recall that we are working with derivative securities that are of the form
+    \[H = h(S_T), \qquad \text{for a measurable map}\; h.\]
+    In particular the derivative security only depends on the price of the stock \(S\) at time \(T\).
+    Moreover, recall that in the article about the BSM equation we have seen that
+    \[dK(t, S_t) = \sigma S_t K_s(t, S_t)dW_t^{\mathbb{Q}}\]
+    This implies that the process \((K(t, S_t))_t\) is a \(\mathbb{Q}\)-Martingale.
+</p>
+
+<p class="BodyText Justified">
+    Using these previous results, we apply the martingale representation theorem to \(K(t, S_t)\):
+    \[\mathbb{E}_{\mathbb{Q}}[h(S_T)\;\vert\;\mathcal{F}_t] = K(t, S_t) = \underbrace{K(0,
+    S_0)}_{=\mathbb{E}_{\mathbb{Q}}[h(S_T)]} + \int_0^t \sigma S_u K_s(u, S_u)dW_u^{\mathbb{Q}}.\]
+    If we now take a hedging strategy \((\pi_0, \pi)\), we must have
+    \[\widetilde{V}_t^\pi = \mathbb{E}_{\mathbb{Q}}\left[\frac{h(S_T)}{B_T} \;\vert\; \mathcal{F}_t\right] =
+    e^{-rT}\mathbb{E}_{\mathbb{Q}}[h(S_T)] + \sigma \int_0^t e^{-rT}K_s(u, S_u)S_udW_u^{\mathbb{Q}}.\]
+    Equivalently, by looking at the dynamics, we have
+    \[d\widetilde{V}_t^\pi = \sigma e^{-rT} K_s(t, S_t) S_t dW_t^{\mathbb{Q}}.\]
+</p>
+
+<p class="BodyText Justified">
+    By the self-financing nature of a hedging-strategy, we further deduce that
+    \[d\widetilde{V}_t^\pi = d\widetilde{G}_t^\pi = \sigma e^{-rt} \pi(t)dW_t^{\mathbb{Q}}.\]
+    But as the martingale representation theorem comes with a statement of uniqueness, we must have
+    \[\sigma e^{-rT} K_s(t, S_t)S_t = \sigma e^{-rt} \pi(t) \qquad \lambda\vert_{[0,T]} \otimes \mathbb{P}\text{-a.s.}\]
+    and by solving the equation for \(\pi(t)\), we retrieve the risky part
+    \[\pi(t) = e^{-r(T - t)} K_s(t, S_t) S_t = F_s(t, S_t) S_t.\]
+    Finally, since the strategy \((\pi_0, \pi)\) is self-financing, we can deduce on the formula for \(\pi_0\):
+    \[\pi_0(t) = V_t^\pi - \pi(t) = e^{-r(T-t)} K(t, S_t) - F_s(t, S_t) S_t = F(t, S_t) - F_s(t, S_t) S_t.\]
+</p>
+
+<p class="BodyText Justified">
+    Thus, to conclude, if we are able to solve the Black-Scholes-Merton equation, we not only know the fair price of a
+    derivative security but also a suitable hedging strategy.
+    Although, solving the BSM equation is a challenge on its own.
+</p>

@@ -1,0 +1,153 @@
+---
+layout: default
+---
+
+<!-- Check for empty Keys or Values in the json.yml -->
+{% case site.quotes -%}
+{% when 'keys' -%}
+{% assign quote_key = '"' -%}
+{% assign quote_value = '' -%}
+{% when 'values' -%}
+{% assign quote_key = '' -%}
+{% assign quote_value = '"' -%}
+{% when false -%}
+{% assign quote_key = '' -%}
+{% assign quote_value = '' -%}
+{% else -%}
+{% assign quote_key = '"' -%}
+{% assign quote_value = '"' -%}
+{% endcase -%}
+
+<!-- Check for if items should be separated by commas -->
+{% if site.commas == false -%}
+{% assign comma = '' -%}
+{% else -%}
+{% assign comma = ',' -%}
+{% endif -%}
+
+<!-- Set if links should be opened in a new tab -->
+{% if site.newtab == true -%}
+{% assign tab = '_blank' -%}
+{% else -%}
+{% assign tab = '_self' -%}
+{% endif -%}
+
+<div id="json">
+    {% for pair in site.data.json %}
+    <div class="my ms">
+        <!-- parse the posts, if there are any -->
+        {% if pair.key == "posts" and site.posts.size > 0 %}
+        {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}: [
+        <ul id="postList">
+            {% for post in site.posts %}
+            <li class="post">
+                <!-- [<span class="cursor">></span>] {{ quote_value }}<span class="value">{{ post.title }}</span>{{ quote_value }} -->
+                [<span class="cursor">></span>] {{ quote_value }}<span class="value">{{ post.url | relative_url
+                    }}</span>{{ quote_value }}
+            </li>
+            {% endfor %}
+        </ul>
+        ]
+        <!-- the values that should be typed by typed.js -->
+        {% elsif pair.typed -%}
+        <div id="strings">
+            {% for value in pair.value -%}
+            <span>{{ value }}</span>
+            {%- endfor %}
+        </div>
+
+        {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}:
+        {{ quote_value }}<span class="value"><span id="typed"></span></span>{{ quote_value }}
+
+        <!-- the values that contain a list of key-value-pairs, possibly URLs -->
+        {%- elsif pair.value.first.key -%}
+        {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}: [
+        {% for value in pair.value -%}
+        {% if value.url -%}
+        <p class="ms">
+            {{ quote_key }}<span class="key">{{ value.key }}</span>{{ quote_key }}:
+            {{ quote_value }}<a class="value" href="{{ value.url | relative_url }}" target="{{ tab }}">{{ value.value
+                }}</a>{{ quote_value }}
+            {%- unless forloop.last -%}
+            {{ comma }}
+            {%- endunless %}
+        </p>
+        {% else -%}
+        <p class="ms">
+            {{ quote_key }}<span class="key">{{ value.key }}</span>{{ quote_key }}:
+            {{ quote_value }}<span class="value">{{ value.value }}</span>{{ quote_value }}
+            {%- unless forloop.last -%}
+            {{ comma }}
+            {%- endunless %}
+        </p>
+        {% endif -%}
+        {%- endfor -%}
+        ]
+
+        <!-- the values that contain a list of values -->
+        {%- elsif pair.value.first -%}
+        {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}: [
+        {% for value in pair.value -%}
+        {% if value.url -%}
+        <p class="ms">
+            {{ quote_value }}<a class="value" href="{{ value.url | relative_url }}" target="{{ tab }}">{{ value.value
+                }}</a>{{ quote_value }}
+            {%- unless forloop.last -%}
+            {{ comma }}
+            {%- endunless %}
+        </p>
+        {% else -%}
+        <p class="ms">
+            {{ quote_value }}<span class="value">{{ value }}</span>{{ quote_value }}
+            {%- unless forloop.last -%}
+            {{ comma }}
+            {%- endunless %}
+        </p>
+        {% endif -%}
+        {%- endfor -%}
+        ]
+
+        <!-- the values that contain URLs -->
+        {%- elsif pair.url -%}
+        {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}:
+        {{ quote_value }}<a class="value" href="{{ pair.url | relative_url }}" target="{{ tab }}">{{ pair.value }}</a>{{
+        quote_value }}
+        {%- else -%}
+        {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}:
+        {{ quote_value }}<span class="value">{{ pair.value }}</span>{{ quote_value }}
+        {%- endif -%}
+        {%- unless forloop.last -%}
+        {{ comma }}
+        {%- endunless %}
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const postList = document.getElementById("posts");
+        const posts = document.querySelectorAll(".post");
+
+        if (posts.length != 0) {
+            let currentIndex = 0;
+            posts[currentIndex].classList.add("selected");
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "ArrowDown") {
+                    event.preventDefault();
+                    posts[currentIndex].classList.remove("selected");
+                    currentIndex = (currentIndex + 1) % posts.length;
+                    posts[currentIndex].classList.add("selected");
+                } else if (event.key === "ArrowUp") {
+                    event.preventDefault();
+                    posts[currentIndex].classList.remove("selected");
+                    currentIndex = (currentIndex - 1 + posts.length) % posts.length;
+                    posts[currentIndex].classList.add("selected");
+                } else if (event.key === "Enter") {
+                    let selection = posts[currentIndex].textContent.split('"')[1];
+                    window.location.href += selection;
+                }
+            });
+        }
+    });
+</script>

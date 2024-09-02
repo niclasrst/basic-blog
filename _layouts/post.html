@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="{{ 'assets/css/poststyles.css' | relative_url }}" />
+		<link rel="stylesheet" href="{{ 'assets/css/backbutton.css' | relative_url }}" />
+
+		<title>{{ page.title }}</title>
+
+		<script
+			id="MathJax-script"
+			async
+			src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+		></script>
+
+		<script>
+			window.onscroll = function () {
+				var appear = 100;
+				if (window.pageYOffset >= appear) {
+					document.getElementsByClassName("arrow")[0].style.opacity = "1";
+					document.getElementsByClassName("arrow")[0].style.pointerEvents = "all";
+				} else {
+					document.getElementsByClassName("arrow")[0].style.opacity = "0";
+					document.getElementsByClassName("arrow")[0].style.pointerEvents = "none";
+				}
+			};
+
+			function back() {
+				window.history.back();
+			}
+		</script>
+	</head>
+	<body>
+		<div class="back">
+			<button class="arrow -dark" onclick="back()"></button>
+		</div>
+
+		<div class="Margins">
+			<p class="LatexTitle">{{ page.title }}</p>
+			{% if page.author %}
+			<p class="LatexAuthor">{{ page.author }}</p>
+			{% endif %} {% if page.date %}
+			<p class="LatexDate">{{ page.date | date: "%-d. %B %Y" }}</p>
+			{% endif %} {% if page.abstract %}
+			<div class="AbstractMargins">
+				<p class="LatexAbstract">Abstract</p>
+				<p class="LatexAbstractText">{{ page.abstract }}</p>
+			</div>
+			{% endif %} {{ content }}
+		</div>
+	</body>
+	<footer class="footerSize"></footer>
+</html>

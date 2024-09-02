@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Deriving the BSM equation"
+date: 2024-08-14
+abstract: "We will derive the famous Black-Scholes-Merton equation from mathematical finance. An important aspect we
+already want to emphasize is, that this equation is actually a PDE and not a SDE as one might expect."
+---
+
+<p class="Section">1 &ensp; The Feynman-Kac and BSM equations</p>
+<p class="BodyText Justified">
+	One can show that there is a measurable function \(K: \mathbb{R}^2 \rightarrow \mathbb{R}\) such that
+	\[\mathbb{E}_{\mathbb{Q}}\left[h(S_T) \;\vert\; \mathcal{F}_t\right] = K(t, S_t)\]
+	and that satisfies the boundary condition \(K(T, S_T) = h(S_T) = H\). Using this, and recalling that for a
+	derivative
+	security of the form
+	\[H = h(S_T),\]
+	the fair price is given by
+	\[\Pi_t(H) = B_t \mathbb{E}_{\mathbb{Q}}\left[\frac{H}{B_T}\;\vert\;\mathcal{F}_t\right],\]
+	we define a second map
+	\[F(t, S_t) = e^{-r(T - t)} K(t, S_t) = \Pi_t(H) \quad\text{with}\quad F(T, S_T) = h(S_T) = H.\]
+	First of all, \(K(t, S_t) = e^{r(T - t)} F(t, S_t)\) and thus, \(K(t, S_t)\) is a \(\mathbb{Q}\)-Martingale.
+	This observation will be important in a second.
+	By the Itô-Doeblin formula we have
+	\[\begin{aligned}
+	dK(t, S_t) &= K_t(t, S_t)dt + K_s(t, S_t)dS_t + \frac{1}{2}K_{ss}(t, S_t)d\langle S \rangle_t \\
+	&= K_t(t, S_t)dt + K_s(t, S_t)d\left( r S_t dt + \sigma S_t dW_t^{\mathbb{Q}} \right) + \frac{1}{2}K_{ss}(t,
+	S_t)S_t^2 \sigma^2 dt \\
+	&= \underbrace{\left[K_t(t, S_t) + K_s(t, S_t) r S_t + \frac{1}{2} K_{ss}(t, S_t) \sigma^2
+	S_t^2\right]}_{\overset{!}{=}0}dt + \sigma S_t K_s(t, S_t) dW_t^{\mathbb{Q}} \\
+	&= \sigma S_t K_s(t, S_t) dW_t^{\mathbb{Q}}.
+	\end{aligned}\]
+	Thus, for the map \(K(t, s)\) we have the <b>PDE</b> (Feynman-Kac-formula):
+	\[K_t(t, s) + K_s(t, s) rs + \frac{1}{2} K_{ss}(t, s) \sigma^2 s^2 \overset{!}{=} 0.\] By using that \[F(t, s) =
+	e^{-r(T - t)} K(t, s),\]
+	one easily calculates the necessary derivatives and we get the following <b>PDE</b> for \(F\):
+	\[F_t(t, s) - r F(t, s) + sr F_s(t, s) + \frac{1}{2} \sigma^2 s^2 K_{ss}(t, s) \overset{!}{=} 0
+	\quad\text{with}\quad F(T, s) = h(s).\]
+	Recall that the map \(F\) describes the fair price of the derivative security \(H=h(S_T)\) at time \(t\).
+	Therefore, if we are able to solve the BSM equation, we know the fair price of \(H\), which one might consider as a
+	fundamental goal of mathematical finance.
+</p>
+
+<p class="BodyText Justified">
+	Using the martingale representation theorem, one can also construct a hedging strategy for \(H\) out of the BSM
+	equation. But this is for another post.
+</p>
