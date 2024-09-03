@@ -145,7 +145,7 @@ layout: default
                     posts[currentIndex].classList.add("selected");
                 } else if (event.key === "Enter") {
                     let selection = posts[currentIndex].textContent.split('"')[1];
-                    window.location.href += selection;
+                    window.location.href = selection;
                 }
             });
         }
