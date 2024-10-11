@@ -42,8 +42,9 @@ layout: default
             {% for post in site.posts %}
             <li class="post">
                 <!-- [<span class="cursor">></span>] {{ quote_value }}<span class="value">{{ post.title }}</span>{{ quote_value }} -->
-                [<span class="cursor">></span>] {{ quote_value }}<span class="value">{{ post.url | relative_url
-                    }}</span>{{ quote_value }}
+                [<span class="cursor">></span>] {{ quote_value }}<span class="value">{{ post.url | relative_url | split:
+                    '/' | slice: -4, 4 | join: '/' }}</span>{{ quote_value }}
+
             </li>
             {% endfor %}
         </ul>
@@ -145,7 +146,7 @@ layout: default
                     posts[currentIndex].classList.add("selected");
                 } else if (event.key === "Enter") {
                     let selection = posts[currentIndex].textContent.split('"')[1];
-                    window.location.href = selection;
+                    window.location.href += selection;
                 }
             });
         }
