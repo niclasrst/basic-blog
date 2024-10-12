@@ -1,0 +1,267 @@
+---
+layout: post
+title: "The dimension of algebraic varieties"
+date: 2024-10-11
+abstract: "I want to give a brief introduction to the concept of dimension of algebraic varieties.
+We will define the topological dimension of a variety (or more general of a topological space) and it will turn out that
+in the case of an algebraic variety, we can describe the dimension of a
+variety in purely algebraic terms."
+---
+
+<p class="Section">1&ensp;Topological and algebraic dimension</p>
+<p class="BodyText Justified">
+    Let us start by introducing the concept of dimension for arbitrary topological spaces.
+</p>
+
+<div class="definition BodyText">&ensp;
+    Let \(X \neq \emptyset\) be a topological space.
+    The number
+    \[\text{dim}(X) := \sup\{n \in \mathbb{N}_0 \;\vert\; \emptyset \subsetneq X_0 \subsetneq X_1 \subsetneq \cdots
+    \subsetneq X_n \text{ is a chain of irred. and closed subspaces of } X\}\]
+    is called the <b>Krull dimension</b> of \(X\).
+</div>
+
+<p class="BodyText Justified">
+    Recall, that a topological space is irreducible if it cannot be written as the union of two proper closed subsets,
+    i.e.
+    there are no two closed subsets \(A, B \subset X\) such that \(X = A \cup B\) and \(X \neq A, B\).
+    <br><br>
+    In similar fashion, we can make the notion of dimension available to algebraic objects, namely rings.
+</p>
+
+<div class="BodyText definition">&ensp;
+    Let \(R\) be a ring and \(\mathfrak{p}\trianglelefteq R\) a prime ideal.
+    <ol class="Enumerate">
+        <li>
+            The height of \(\mathfrak{p}\) is given by
+            \[\text{ht}(\mathfrak{p}) := \sup\{n \in \mathbb{N}_0 \;\vert\; \mathfrak{p}_0 \subsetneq \mathfrak{p}_1
+            \subsetneq \cdots \subsetneq \mathfrak{p}_n = \mathfrak{p} \text{ is a chain of prime ideals in } R\}.\]
+        </li>
+        <li>
+            The Krull dimension of \(R\) is then defined as
+            \[\text{dim}(R) := \sup\{\text{ht}(\mathfrak{p}) \;\vert\; \mathfrak{p}\trianglelefteq R \text{ prime}\}.\]
+        </li>
+    </ol>
+</div>
+
+<div class="BodyText proposition">&ensp;
+    Let \(k\) be a field.
+    <ol class="Enumerate">
+        <li>
+            For every affine algebra, we have that
+            \[\text{dim}(A) = \text{dim}(\text{Specm}(A)).\]
+        </li>
+        <li>
+            If \(k\) is algebraically closed, then for every affine algebraic variety \(V \subseteq \mathbb{A}^n(k)\) it
+            holds that
+            \[\text{dim}(V) = \text{dim}(k[V]).\]
+        </li>
+    </ol>
+</div>
+<div class="BodyText Justified proof">
+    <ol class="Enumerate">
+        <li>
+            This follows directly from the definitions by using the fact that the irreducible, Zariski-closed subsets of
+            the maximal spectrum \(\text{Specm}(A)\) are in bijection to the prime ideals of \(A\).
+        </li>
+        <li>
+            This is an immediate consequence of 1. by setting \(A = k[V]\).
+            To elaborate a bit more on this, as the field \(k\) is algebraically closed, the maximal ideals of \(k[V]\)
+            are in bijection to the points of \(V\).
+            Hence, the maximal Spectrum \(\text{Specm}(k[V])\) is isomorphic to \(V\).<span id="QED"></span>
+        </li>
+    </ol>
+</div>
+
+<p class="BodyText Justified">
+    To get interesting results and even calculate the dimensions of what one would consider 'simple' varieties (e.g. the
+    standard affine plane \(\mathbb{A}^n(k)\)), we need more algebraic machinery.
+    But before we introduce these tools, let us give some basic examples.
+</p>
+
+<div class="BodyText Justified example">&ensp;
+    <ol class="Enumerate">
+        <li>
+            For any Hausdorff space \(X\), we have that \(\text{dim}(X) = 0\).
+            This is due to the fact that the only irreducible subsets of a Hausdorff space are the singletons.
+        </li>
+        <li>
+            For \(k\) an infinite field, we have that \(\text{dim}(\mathbb{A}^1(k)) = 1\).
+        </li>
+    </ol>
+</div>
+
+<p class="Section">2&ensp;Algebraic tools</p>
+
+<p class="BodyText Justified">
+    To underline the importance of such tools, consider a chain of prime ideals as follows
+    \[\langle 0\rangle = \mathfrak{p}_0 \subsetneq \mathfrak{p}_1 \subsetneq \cdots \subsetneq \mathfrak{p}_d
+    \quad\text{
+    in}\quad k[X_1, \ldots, X_n].\]
+    Then, by factoring out \(\mathfrak{p}_1\) one gets a chain of prime ideals of length \(d-1\) in \(k[X_1, \ldots,
+    X_n] / \mathfrak{p}_1\), but there is no reason for the existence of an isomorphism between \(k[X_1, \ldots,
+    X_n]/\mathfrak{p}_1\) and \(k[X_1, \ldots, X_{n-1}]\).
+    Thus, not even the dimension of the standard affine spaces can be deduced via induction from the case \(n=1\).
+    The central concept to overcome this issue is the notion of an integral ring extension.
+    <br><br>
+    <i>
+        Reminder: a ring extension \(S/R\) is called integral, if every element of \(S\) is integral.
+        That is, every element is the root of a monic polynomial (i.e. a polynomial with leading coefficient equal to
+        1).
+    </i>
+    <br><br>
+    As the goal of this little post is to give a brief introduction to the concept of a dimension for algebraic
+    varieties,
+    we won't give proofs for most of the following results.
+    For the interested reader, all the proofs should be contained in any standard textbook on commutative algebra.
+</p>
+
+<div class="BodyText theorem">&ensp;
+    Let \(S/R\) be an integral ring extension.
+    Then \(\text{dim }S = \text{dim } R\) holds.
+</div>
+
+<p class="BodyText Justified">
+    Above theorem is a consequence of one of the theorems of Cohen-Seidenberg, often reffered to as the 'going-up'
+    theorem.
+    A second result of Cohen-Seidenberg is the 'going-down' theorem, which allows us to deduce that the dimension of the
+    polynomial ring \(k[X_1, \ldots, X_n]\) is precisely \(n\), what we were hoping for.
+    We collect this with another result in the following theorem.
+</p>
+
+<div class="BodyText theorem">&ensp;
+    <ol class="Enumerate">
+        <li>
+            Noether-normalization: Every finitely generated \(k\)-algebra \(A\) is an integral ring extension of a
+            polynomial ring \(k[X_1,
+            \ldots, X_n]\).
+        </li>
+        <li>
+            Noether-normalization (deluxe): Let \(I \trianglelefteq A\) be an ideal.
+            Then, the \(X_1, \ldots, X_n\) in \(A\) can be chosen such that \(I \cap k[X_1, \ldots, X_n] = \langle
+            X_{\delta + 1}, \ldots, X_n \rangle\) for \(\delta \leq n\).
+        </li>
+        <li>
+            \(\text{dim } k[X_1, \ldots, X_n] = n\).
+        </li>
+    </ol>
+</div>
+
+<p class="BodyText Justified">
+    The goal for the rest of this post is to calculate the dimension of a hyperplane (a affine variety defined by a
+    single irreducible polynomial).
+    Before we do so, we want to give a quick excursion on the dimension of quasi-projective varieties, i.e. open subsets
+    of projective varieties.
+</p>
+
+<p class="Section">3&ensp;Dimension of quasi-projective varieties</p>
+
+<p class="BodyText Justified">
+    As the coordinate ring of a projective variety 'remembers the embedding' (there is a choice of basis) we have to
+    take a slightly different approach, we will use the function field of the variety.
+</p>
+
+<div class="BodyText definition">&ensp;
+    Let \(K/k\) be a field extension, then
+    \[\text{trdeg}_k (K) := \sup\{n \in \mathbb{N}_0 \;\vert\; \exists\;n \text{ algebraically independent elements over
+    } k
+    \text{ in } K\}\]
+    is called the transcendence degree of \(K\) over \(k\).
+</div>
+
+<p class="BodyText Justified">
+    The following theorem now relates this concept to the dimension of a quasi-projective variety.
+</p>
+
+<div class="BodyText theorem">
+    Let \(k\) be algebraically closed, \(V \subseteq \mathbb{P}^n(k)\) a quasi-projective variety.
+    Then \[\text{dim } V = \text{trdeg}_k\; k(V).\]
+    <i>Here, \(k(V)\) denotes the function field of \(V\).</i>
+</div>
+
+<p class="BodyText Justified">
+    Another interesting incidence we want to mention is the following.
+</p>
+
+<p class="BodyText proposition">
+    Let \(V \subseteq \mathbb{P}^n(k)\) be an irreducible quasi-projective variety and \(x \in V\).
+    Then \[\text{dim }V = \text{dim }\mathcal{O}_{V, x}.\]
+    <i>Here, \(\mathcal{O}_{V,x}\) denotes the local ring of \(V\) in the point \(x\).</i>
+</p>
+
+<p class="BodyText Justified">
+    This last result states that the dimension of a quasi-projective variety is the same as the dimension of its local
+    ring.
+    Hence, the dimension of a quasi-projective variety (at least of an irreducible one) is a <b>local</b> property!
+</p>
+
+<p class="Section">4&ensp;The dimension of a hyperplane.</p>
+
+<p class="BodyText Justified">
+    Finally, we will calculate the dimension of a hyperplane in \(\mathbb{A}^n(k)\).
+    An important result we need for this is the following.
+</p>
+
+<div class="BodyText Justified theorem">&ensp;
+    Let \(A\) be a finitely generated \(k\)-algebra with no zero divisors.
+    Then, all maximal chains of prime ideals in \(A\) have the same length.
+</div>
+
+<p class="BodyText Justified">
+    Now the proof is in two steps.
+    We will proof a more general result and deduce our claim from it.
+</p>
+
+<div class="BodyText theorem">&ensp;
+    Let \(V \subseteq \mathbb{A}^n(k)\) be an irreducible affine variety and \(k\) algebraically closed.
+    <ol class="Enumerate">
+        <li>
+            \(\text{dim }V + \text{ht}(I(V)) = n\)
+        </li>
+        <li>
+            If \(V = V(f)\) for \(f \in k[X_1, \ldots, X_n]\) irreducible, then \(\text{dim }V = n-1\).
+        </li>
+    </ol>
+</div>
+<div class="BodyText Justified proof">
+    <ol class="Enumerate">
+        <li>
+            Since \(V\) is irreducible, its vanishing ideal \(I(V)\) is a prime ideal.
+            So, let \[\langle 0\rangle \subsetneq \mathfrak{p}_1 \subsetneq \cdots \subsetneq \mathfrak{p}_d\]
+            be a maximal chain of prime ideals in \(k[X_1, \ldots, X_n]\) with \(I(V) = \mathfrak{p}_i\) for an i.
+            Then, by the theorem above, we have that \(d = \text{dim }k[X_1, \ldots, X_n] = n\) and \(i =
+            \text{ht}(I(V))\).
+            <br><br>
+            Moreover, we have that
+            \[\langle 0\rangle \subsetneq \mathfrak{p}_{i+1}/\mathfrak{p}_i \subsetneq \cdots \subsetneq
+            \mathfrak{p}_n/\mathfrak{p}_i\]
+            is a maximal chain of prime ideals in \(k[X_1, \ldots, X_n]/\mathfrak{p}_i = k[X_1, \ldots, X_n]/I(V)\).
+            Thus, we have that \[\text{dim }V = n - i = n - \text{ht}(I(V)) \quad\iff\quad \text{dim }V +
+            \text{ht}(I(V)) = n.\]
+        </li>
+        <li>
+            Since \(f\) is irreducible, we have that the ideal generated by \(f\) is a prime ideal, denoted by \(\langle
+            f\rangle\).
+            <br><br>
+            <em class="NTS">It remains to show:</em> \(\text{ht}(\langle f\rangle) = 1\).
+            <br><br>
+            Note that since \(f \neq 0\), we have that \(\text{ht}(\langle f\rangle) \geq 1\).
+            <br><br>
+            For the other direction, let \(\langle 0\rangle \subsetneq \mathfrak{p} \subsetneq \langle f\rangle\) be a
+            chain of prime ideals, \(h \in \mathfrak{p} \setminus \{0\}\) and \(h = h_1\cdot \ldots \cdot h_r\)
+            a prime decomposition.
+            Since \(h \in \langle f\rangle\), there is an index \(i \in \{1, \ldots, r\}\) with \(h_i \in \langle
+            f\rangle\).
+            This implies that \(h_i = f \cdot g\) for a unit \(g \in k[X_1, \ldots, X_n]\), thus \(g \in k^\times\).
+            But then, \(f \in \mathfrak{p}\), implying \(\mathfrak{p} = \langle f\rangle\), which shows that the chain
+            \(\langle 0\rangle \subsetneq \langle f\rangle\) is already maximal.
+            <br><br>
+            Hence, \(\text{ht}(\langle f\rangle) = 1\), which concludes the proof.
+            <span id="QED"></span>
+        </li>
+    </ol>
+</div>
+
+<p class="BodyText Justified">
+    As we have seen now, the dimension of a hyperplane is exactly what one would expect it to be.
+</p>

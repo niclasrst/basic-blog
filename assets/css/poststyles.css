@@ -2,22 +2,26 @@
   font-family: "Computer Modern";
   src: url("http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf");
 }
+
 @font-face {
   font-family: "Computer Modern";
   src: url("http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsx.otf");
   font-weight: bold;
 }
+
 @font-face {
   font-family: "Computer Modern";
   src: url("http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsi.otf");
   font-style: italic, oblique;
 }
+
 @font-face {
   font-family: "Computer Modern";
   src: url("http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunbxo.otf");
   font-weight: bold;
   font-style: italic, oblique;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -114,6 +118,18 @@
   column-count: 3;
 }
 
+.Enumerate {
+  margin-left: 3rem;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+li {
+  font-size: 23px;
+  line-height: 125%;
+  margin-top: 13px;
+}
+
 .Justified {
   text-align: justify;
   text-justify: inter-word;
@@ -164,4 +180,87 @@
   font-size: 33px;
 }
 
-/*# sourceMappingURL=styles.css.map */
+.NTS {
+  text-decoration: wavy;
+}
+
+.proof {
+  display: block;
+  font-style: oblique;
+  margin-top: -40px;
+}
+
+#QED {
+  float: right;
+  height: 15px;
+  width: 15px;
+  margin-top: 10px;
+  clear: both;
+  background-color: black;
+}
+
+.proof:before {
+  content: "Proof. ";
+  font-weight: bold;
+  font-style: normal;
+}
+
+.theorem {
+  display: block;
+  font-style: italic;
+}
+
+.theorem:before {
+  content: "Theorem. ";
+  font-weight: bold;
+  font-style: normal;
+}
+
+.theorem[text]:before {
+  content: "Theorem (" attr(text) ") ";
+}
+
+.definition {
+  display: block;
+  font-style: italic;
+}
+
+.definition:before {
+  content: "Definition. ";
+  font-weight: bold;
+  font-style: normal;
+}
+
+.definition[text]:before {
+  content: "Definition (" attr(text) ") ";
+}
+
+.proposition {
+  display: block;
+  font-style: italic;
+}
+
+.proposition:before {
+  content: "Proposition. ";
+  font-weight: bold;
+  font-style: normal;
+}
+
+.proposition[text]:before {
+  content: "Proposition (" attr(text) ") ";
+}
+
+.example {
+  display: block;
+  font-style: italic;
+}
+
+.example:before {
+  content: "Example. ";
+  font-weight: bold;
+  font-style: normal;
+}
+
+.example[text]:before {
+  content: "Example (" attr(text) ") ";
+}
